@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya');
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+
+.nobull{
+    list-style-type: none;
+}
+
+.varela{
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+.alegreya {
+    font-family: 'Alegreya', serif;
+
+}
+
+
+.dim{
+    filter: brightness(100%);
+}
+
+.twitter_container{
+    max-width: 600px;
+}
+
+.social_container{
+margin-top: -10px;
+
+}
+
+.social{
+    max-width: 15%;
+    max-height: 50px;
+    height: auto;
+    margin-right:5px;
+    margin-left:5px;
+    margin-bottom:10px;
+}
+
+h1{
+    font-family: 'Varela Round', sans-serif;
+    padding-top: 18px;
+
+}
+
+.img_placeholder{
+    max-height: 200px;
+    max-width: 200px;
+    margin-top: 20px;
+
+}
+
+.menu_image{
+    max-height: 210px;
+    max-width: 210px;
+    margin-top: 20px;
+}
+
+.slideshow_container{
+    margin: auto;
+    width: 50%;
+}
+
+.menu{
+    margin-top: 10px;
+}
+
+.menu_item{
+    margin-top: 5px;
+}
+
+.menu_item_name{
+    font-family: 'Alegreya', serif;
+    font-size: 20px;
+    color: #666666;
+
+}
+
+.menu_item_description{
+    font-family: 'Alegreya', serif;
+    font-size: 18px;
+    color: #666666;
+    font-style: italic;
+}
+
+.menu_heading{
+    font-family: 'Varela Round', sans-serif;
+    font-size: 26px;
+    color: #666666;
+
+}
+
+.contact_form_container{
+     background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/dimension.png");
+}
+
+.contact_form{
+    max-width: 600px;
+    margin: auto;
+    margin-top: 10px;
+    width: 90%;
+
+}
+
+.footer_container{
+    margin: auto;
+}
+
+.login_bg{
+    position: fixed;
+    height:100%;
+    width: 100%;
+    background-color: #00878c;
+    background-image: url("https://www.transparenttextures.com/patterns/black-thread.png");
+}
+
+.login_container{
+    margin: auto;
+    max-width:500px;
+    width:95%
+}
+
+.new_admin{
+    max-width:500px
+}
