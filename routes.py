@@ -31,6 +31,9 @@ def index():
             x = os.path.join('static/img/menu/', filename)
             menu_image_list.append(x)
 
+    # Menu Items
+    items = MenuItem.query.order_by(MenuItem.rank.asc())
+
     # Handling email contact form
     form = Contact()
     if request.method == 'POST':
@@ -45,7 +48,7 @@ def index():
             mail.send(msg)
             flash('Message sent successfully!')
 
-    return render_template('index.html', title='Sian Street Food', form=form, year=year,
+    return render_template('index.html', title='Sian Street Food', form=form, year=year, items=items,
                            tweet_handle=handle, tweet_text=text, tweet_time=time, tweet_user=twitter_user_name,
                            image1=menu_image_list[0], image2=menu_image_list[1],
                            image3=menu_image_list[2], image4=menu_image_list[3])
@@ -82,6 +85,7 @@ def admin():
 
     img_form = Image()
     if img_form.validate_on_submit():
+
         if img_form.img1.data:
             save_picture(img_form.img1.data, '1')
 

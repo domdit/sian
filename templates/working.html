@@ -83,7 +83,7 @@
                             <div class="form-check">
                                 {{ form.head(class="form-check-input") }}
                                 {{ form.head.label(class="form-check-label") }}
-                                <small>(Leave description blank)</small>
+                                <small>(Description will appear to the right of the heading)</small>
                             </div>
                             <div class="form-check">
                                 {{ form.spice(class="form-check-input") }}
@@ -108,38 +108,49 @@
             <div class="container menu">
                 <ul id="sortable">
                     {% for item in items %}
+
                     <li class="nobull kore" id="{{ item.id }}">
                         <div class="menu_item">
                             {% if item.head == True %}
-
+                            <div>
                                 <div class="menu_heading">
                                     {{ item.name }}
 
-                                </div>
-
-                            {% else %}
-
-                                <div class="menu_item_name">
-                                    {{ item.name }}
-                                    {% if item.spice %}
-                                        <small><i class="fas fa-pepper-hot text-danger"></i></small>
-                                    {%endif%}
-                                    {% if item.vegetarian %}
-                                        <small><i class="fas fa-leaf text-success"></i></small>
-                                    {%endif%}
+                                    <small class="menu_item_name" >
+                                        {{item.description}}
+                                    </small>
 
                                 </div>
-                                <div class="menu_item_description">
-                                    {{ item.description }}
-                                </div>
+                                <a href="{{ url_for('delete_item', item_id=item.id) }}">Delete</a>
 
-                            {% endif %}
+                            </div>
+                    {% else %}
+                        <div class="col">
+                            <div class="menu_item_name">
+                                {{ item.name }}
+                                {% if item.spice %}
+                                    <small><i class="fas fa-pepper-hot text-danger"></i></small>
+                                {%endif%}
+                                {% if item.vegetarian %}
+                                    <small><i class="fas fa-leaf text-success"></i></small>
+                                {%endif%}
+
+                            </div>
+
+                            <div class="menu_item_description">
+                                {{ item.description }}
+                            </div>
 
                             <a href="{{ url_for('delete_item', item_id=item.id) }}">Delete</a>
 
                         </div>
+
+                    {% endif %}
+
+                        </div>
                     </li>
                     {% endfor %}
+
                 </ul>
                 <button class="btn btn-outline-info" onclick="postSave()">Save & Post Menu</button><br>
             </div>
