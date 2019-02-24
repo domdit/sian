@@ -69,36 +69,36 @@
             <!-- FORM -->
             <div class="container">
                 <form action="" method="POST">
-                    {{ form.hidden_tag() }}
+                    {{ menu_form.hidden_tag() }}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4">Add New Item</legend>
                             <div class="form-group">
-                                {{ form.name.label(class="form-control-label") }}
-                                {{ form.name(class="form-control form-control-lg") }}
+                                {{ menu_form.name.label(class="form-control-label") }}
+                                {{ menu_form.name(class="form-control form-control-lg") }}
                             </div>
                             <div class="form-group">
-                                {{ form.description.label(class="form-control-label") }}
-                                {{ form.description(class="form-control form-control-lg") }}
+                                {{ menu_form.description.label(class="form-control-label") }}
+                                {{ menu_form.description(class="form-control form-control-lg") }}
                             </div>
                             <div class="form-check">
-                                {{ form.head(class="form-check-input") }}
-                                {{ form.head.label(class="form-check-label") }}
+                                {{ menu_form.head(class="form-check-input") }}
+                                {{ menu_form.head.label(class="form-check-label") }}
                                 <small>(Description will appear to the right of the heading)</small>
                             </div>
                             <div class="form-check">
-                                {{ form.spice(class="form-check-input") }}
-                                {{ form.spice.label(class="form-check-label") }}
+                                {{ menu_form.spice(class="form-check-input") }}
+                                {{ menu_form.spice.label(class="form-check-label") }}
                                 <i class="fas fa-pepper-hot text-danger"></i>
                             </div>
                             <div class="form-check">
-                                {{ form.veg(class="form-check-input") }}
-                                {{ form.veg.label(class="form-check-label") }}
+                                {{ menu_form.veg(class="form-check-input") }}
+                                {{ menu_form.veg.label(class="form-check-label") }}
                                 <i class="fas fa-leaf text-success"></i>
                             </div>
 
                     </fieldset>
                     <div class="form_group">
-                        {{ form.submit(class="btn btn-secondary") }}
+                        {{ menu_form.submit(class="btn btn-secondary") }}
                     </div>
                 </form>
             </div>

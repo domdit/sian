@@ -8,7 +8,6 @@ from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin
 from siamsite.utils import Twitter, save_picture
 from siamsite.models import MenuItem, User
 from datetime import datetime
-import json
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -83,6 +82,20 @@ def logout():
 @login_required
 def admin():
 
+    menu_form = NewItem()
+    if menu_form.validate_on_submit():
+        new_item = MenuItem(name=menu_form.name.data,
+                            description=menu_form.description.data,
+                            head=menu_form.head.data,
+                            spice=menu_form.spice.data,
+                            vegetarian=menu_form.veg.data
+                            )
+        db.session.add(new_item)
+        db.session.commit()
+        flash('You successfully added a new menu item!', 'success')
+        return redirect(url_for('admin'))
+    items = MenuItem.query.order_by(MenuItem.rank.asc())
+
     img_form = Image()
     if img_form.validate_on_submit():
 
@@ -111,26 +124,7 @@ def admin():
         return redirect(url_for('admin'))
 
     return render_template('admin.html', title='Sian Street Food - Admin Page',
-                           img_form=img_form, new_form=new_form)
-
-
-@app.route("/working", methods=['GET', 'POST'])
-def working():
-
-    form = NewItem()
-    if form.validate_on_submit():
-        new_item = MenuItem(name=form.name.data,
-                            description=form.description.data,
-                            head=form.head.data,
-                            spice=form.spice.data,
-                            vegetarian=form.veg.data
-                            )
-        db.session.add(new_item)
-        db.session.commit()
-        flash('You successfully added a new menu item!', 'success')
-        return redirect(url_for('working'))
-    items = MenuItem.query.order_by(MenuItem.rank.asc())
-    return render_template('working.html', form=form, items=items, title='Sian Street Food')
+                           img_form=img_form, new_form=new_form, menu_form=menu_form, items=items,)
 
 
 @app.route("/item/<int:item_id>/delete", methods=['GET', 'POST'])
@@ -139,7 +133,7 @@ def delete_item(item_id):
     db.session.delete(item)
     db.session.commit()
     flash('Your menu item has been deleted!', 'success')
-    return redirect(url_for('working'))
+    return redirect(url_for('admin'))
 
 
 @app.route("/post", methods=['POST'])
