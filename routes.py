@@ -156,7 +156,7 @@ def post():
 
     full_menu = MenuItem.query.order_by(MenuItem.rank.desc())
 
-    return res, render_template("post.html", x=full_menu)
+    return res
 
 
 
