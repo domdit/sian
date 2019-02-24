@@ -93,8 +93,13 @@ h1{
 }
 
 .contact_form_container{
-     background-color: #ffffff;
-    background-image: url("https://www.transparenttextures.com/patterns/dimension.png");
+    background-image: url("img/meat.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
 }
 
 .contact_form{

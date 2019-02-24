@@ -11,11 +11,11 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link active" href="#">Menu <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">About</a>
-      <a class="nav-item nav-link" href="#">Events</a>
+      <a class="nav-item nav-link" href="#menu">Menu</a>
+      <a class="nav-item nav-link" href="#about">About</a>
+      <a class="nav-item nav-link" href="#events">Events</a>
       <a class="nav-item nav-link" href="#">Catering</a>
-      <a class="nav-item nav-link" href="#">Contact</a>
+      <a class="nav-item nav-link" href="#contact">Contact</a>
     </div>
   </div>
     </div>
@@ -73,7 +73,7 @@
                      </span>
             </div>
         </div>
-
+    <a name="menu"></a>
     </div>
 
 
@@ -182,14 +182,38 @@
 
     {% endfor %}
 
+<a name="about"></a>
+            </div>
+
+    <h1>About Us</h1>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <img class="img-fluid" src="static/img/monique.jpg">
+        </div>
+        <div class="col-md-6">
+            <p>
+                Bacon ipsum dolor amet sirloin drumstick turkey, filet mignon ham pork chop frankfurter ribeye sausage burgdoggen leberkas cow bresaola. Salami ham hock meatloaf tri-tip pork loin corned beef buffalo drumstick shoulder cupim fatback ham tenderloin bacon pancetta. Tenderloin frankfurter ground round, ribeye alcatra leberkas boudin short ribs. Biltong spare ribs filet mignon prosciutto pork loin beef ribs drumstick chicken doner chuck porchetta tenderloin cow. Buffalo sirloin pig, tongue ball tip capicola ham short loin. Cupim sausage burgdoggen sirloin pork belly rump, short loin meatloaf biltong t-bone bacon pork loin kielbasa.
+
+Meatball andouille frankfurter, cupim jerky pork loin ribeye bresaola alcatra capicola ham hock shank boudin pastrami pancetta. Kevin meatloaf venison tenderloin, turducken jerky corned beef landjaeger sausage chuck pancetta. Kevin bresaola kielbasa, spare ribs meatloaf chuck picanha pork loin. Shoulder pancetta ham short loin cow tenderloin leberkas picanha drumstick tri-tip porchetta doner bacon pork belly sausage. Tongue hamburger landjaeger doner jerky, pancetta turducken bresaola filet mignon brisket andouille ham sausage prosciutto. Landjaeger pork loin hamburger, brisket turducken ham hock spare ribs ribeye filet mignon picanha doner tail pancetta buffalo.
+            </p>
+
+        </div>
+
+    </div>
 
 
+</div>
 
-    <div class="row">
+<a name="contact"></a>
+
+<div class="container-fluid mt-5">
+    <div class="row contact_form_container mt-4 text-white pb-4">
+
         <form class="contact_form" action="" method="POST">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Drop Us A Line</legend>
+                <legend><h1>Contact Us</h1></legend>
                     <div class="form-group">
                         {{ form.name.label(class="form-control-label") }}:
                         {{ form.name(class="form-control form-control-lg") }}
@@ -210,14 +234,13 @@
 
             </fieldset>
             <div class="form_group">
-                {{ form.submit(class="btn btn-outline-info") }}
+                {{ form.submit(class="btn btn-success") }}
             </div>
         </form>
     </div>
-
 </div>
 
-<div class="container-fluid w-100 bg-dark my_footer text-light mt-4 p-3 border-top border-success">
+<div class="container-fluid w-100 bg-dark my_footer text-light  p-3 border-top border-success">
 
     <div class="container ">
         <center>
@@ -263,7 +286,7 @@
 
 
 
-        </div>
+</div>
 
 
 
