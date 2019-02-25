@@ -158,6 +158,10 @@ def post():
 
     return res
 
+@app.route("/event")
+def event():
+    return render_template('event.html', title="suck my tits")
+
 
 
 
