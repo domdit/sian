@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round');
 
 html {
-scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 .nobull{
@@ -182,3 +182,40 @@ h1{
     background-color: #377C07;
 	border-color: #377C07;
 }
+
+.logo{
+    width: 10%;
+    height: auto;
+    margin-right: 10px;
+}
+
+.navbar-inner{
+    background: transparent;
+}
+
+nav.navbar-light:hover {
+    color: #c41b22; !important
+
+}
+
+a.nav-item:hover .nav-link {
+    color: #c41b22;
+}
+
+.custom-item{
+    margin: 10px;
+    color: #000000;
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+.custom-item:link{
+    color: #ffffff;
+}
+
+.custom-item:hover{
+    color: #c41b22;
+    text-decoration: none;
+}
+
+
