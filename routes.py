@@ -17,7 +17,7 @@ def index():
     year = str(datetime.now().year)
 
     # Handling Twitter
-    twitter_user_name = "o_succ"
+    twitter_user_name = "sianstreetfood1"
     tweet = Twitter(twitter_user_name)
     handle = tweet.user
     text = tweet.text
@@ -32,6 +32,13 @@ def index():
 
     # Menu Items
     items = MenuItem.query.order_by(MenuItem.rank.asc())
+
+    # Cater Menu Items
+
+    cater_items = CaterItem.query.order_by(CaterItem.rank.asc())
+
+    # Event Items
+    event_items = EventItem.query.order_by(EventItem.date.asc())
 
     # Handling email contact form
     form = Contact()
@@ -51,6 +58,7 @@ def index():
                            tweet_handle=handle, tweet_text=text, tweet_time=time, tweet_user=twitter_user_name,
                            image1=menu_image_list[0], image2=menu_image_list[1],
                            image3=menu_image_list[2], image4=menu_image_list[3],
+                           event_items=event_items, cater_items=cater_items
                            )
 
 

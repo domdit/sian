@@ -95,16 +95,6 @@ h1{
 
 }
 
-.contact_form_container{
-    background-image: url("img/meat.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-repeat: no-repeat;
-    background-position-y: center;
-    background-position-x: center;
-}
-
 .contact_form{
     max-width: 600px;
     margin: auto;
@@ -231,4 +221,82 @@ a.nav-item:hover .nav-link {
 
 .admin-link{
     max-width: 300px;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+      position:relative;
+}
+
+.contact_parallax{
+    background-image: url("img/meat.jpg");
+    background-attachment: fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+
+    height:600px;
+}
+
+.main_parallax{
+    background-image: url("img/jiaozi.jpg");
+    background-attachment: fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+
+    height:100vh;
+
+}
+
+.main_parallax_small{
+    background-image: url("img/jiaozi.jpg");
+    background-attachment: fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position-y: -100px;
+    background-position-x: center;
+
+    height:75vh;
+
+}
+
+
+.event_parallax{
+    background-image: url("img/egg.jpg");
+    background-attachment: fixed;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: center;
+
+    height: 500px;
+
+    margin-top:25px;
+
 }

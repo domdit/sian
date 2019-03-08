@@ -12,83 +12,69 @@
 
 {% block content %}
 
-
-<style>
-.carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
-}
-
-.carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
-}
-
-.carousel-control-prev,
-.carousel-control-next{
-      position:relative;
-}
-</style>
-
     <!-- New Event -->
     <div class="container">
+
         <form action="" method="POST">
             {{ event_form.hidden_tag() }}
+
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add New Event</legend>
-                    <div class="form-group">
-                        {{ event_form.name.label(class="form-control-label") }}
-                        {{ event_form.name(class="form-control form-control-md") }}
-                    </div>
-                    <div class="form-group">
-                        {{ event_form.location.label(class="form-control-label") }}
-                        {{ event_form.location(class="form-control form-control-md") }}
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            {{ event_form.date.label(class="form-control-label") }}
-                            {{ event_form.date(class="form-control form-control-md", id="datepicker") }}
-                        </div>
-                        <div class="form-group col-md-4">
-                            {{ event_form.start_time.label(class="form-control-label") }}
-                            {{ event_form.start_time(class="form-control form-control-md", placeholder="1:23 PM") }}
-                        </div>
-                        <div class="form-group col-md-4">
-                            {{ event_form.end_time.label(class="form-control-label") }}
-                            {{ event_form.end_time(class="form-control form-control-md", placeholder="3:21 PM") }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ event_form.description.label(class="form-control-label") }}
-                        {{ event_form.description(class="form-control form-control-md") }}
+
+            <legend class="border-bottom mb-4">Add New Event</legend>
+
+                <div class="form-group">
+                    {{ event_form.name.label(class="form-control-label") }}
+                    {{ event_form.name(class="form-control form-control-md") }}
+                </div>
+
+                <div class="form-group">
+                    {{ event_form.location.label(class="form-control-label") }}
+                    <small> (Use full address in order to link to google maps) </small>
+                    {{ event_form.location(class="form-control form-control-md") }}
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-4">
+                        {{ event_form.date.label(class="form-control-label") }}
+                        {{ event_form.date(class="form-control form-control-md", id="datepicker") }}
                     </div>
 
+                    <div class="form-group col-md-4">
+                        {{ event_form.start_time.label(class="form-control-label") }}
+                        {{ event_form.start_time(class="form-control form-control-md", placeholder="1:23 PM") }}
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        {{ event_form.end_time.label(class="form-control-label") }}
+                        {{ event_form.end_time(class="form-control form-control-md", placeholder="3:21 PM") }}
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    {{ event_form.description.label(class="form-control-label") }}
+                    {{ event_form.description(class="form-control form-control-md") }}
+                </div>
+
             </fieldset>
+
             <div class="form_group">
                 {{ event_form.submit(class="btn btn-secondary") }}
             </div>
+
         </form>
+
     </div>
 
     <!-- DISPLAY EVENTS -->
     <div class="container pb-5">
 
-        <div id="eventCarousel" class="carousel slide" data-ride="false" data-interval="0">
+        <div class="row">
 
+            {% for event_item in event_items %}
 
-
-            <div class="carousel-inner">
-
-        {% for event_row in event_items | batch(3) %}
-
-        <div class="item carousel-item {% if loop.index == 1 %} active {% endif %}">
-
-            <div class="row mt-2">
-
-
-
-            {% for event_item in event_row %}
-
-
-                <div class="col-lg-4">
+                <div class="col-4">
 
                     <div class="rounded event_container border rounded" >
 
@@ -122,22 +108,27 @@
                         </div>
 
                     </div>
-                    <a href="{{ url_for('delete_item', item_id=event_item.id, table='EventItem', location='new_event') }}">Delete</a>
 
+                    <a href="{{ url_for('delete_item', item_id=event_item.id, table='EventItem', location='new_event') }}">Delete</a>
 
                 </div>
 
 
                 <div class="modal fade" id="modal{{event_item.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
                     <div class="modal-dialog" role="document">
+
                         <div class="modal-content">
+
                             <div class="modal-header event_modal_bg">
                                 <h5 class="modal-title" id="exampleModalLabel">{{event_item.name}}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+
                             <div class="modal-body">
+
                                 <div class="container">
                                     <i class="far fa-clock mr-2"></i> {{ event_item.start_time }} -  {{ event_item.end_time }} <br>
                                     <i class="far fa-calendar-alt mr-2"></i> {{ event_item.date.strftime('%m/%d/%Y') }} <br>
@@ -145,34 +136,22 @@
                                     <br>
                                     {{ event_item.description }}
                                 </div>
+
                             </div>
+
                             <div class="modal-footer event_modal_bg">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
 
             {% endfor %}
 
-            </div>
         </div>
-
-        {% endfor %}
-
-    </div>
-
-            <a class="carousel-control-prev float-left" href="#eventCarousel" data-slide="prev">
-    <span class="carousel-control-prev-icon "></span>
-  </a>
-  <a class="carousel-control-next float-right" href="#eventCarousel" data-slide="next">
-    <span class="carousel-control-next-icon "></span>
-  </a>
-
-
-    </div>
-
-    </div>
 
 
 
@@ -187,9 +166,6 @@
         });
         $('#datepicker').datepicker("setDate", new Date());
 
-        $(document).ready(function() {
-   $('.carousel').carousel('pause');
-});
     </script>
 
 {% endblock content %}

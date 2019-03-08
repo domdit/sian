@@ -44,7 +44,7 @@ This page is separate from the main admin page for these reasons:
 
             console.log(list)
 
-            fetch(`${window.origin}/post`, {
+            fetch(`${window.origin}/cater_post`, {
                 method: 'POST',
                 credentials: "include",
                 body: JSON.stringify(list),
@@ -143,6 +143,12 @@ This page is separate from the main admin page for these reasons:
                         <div>
                             <div class="menu_heading">
                                 {{ cater_item.name }}
+
+                                {% if cater_item.whole %}
+                                    <div class="float-right">
+                                        <small>{{cater_item.whole}}/{{cater_item.half}}</small>
+                                    </div>
+                                {%endif%}
 
                                 <small class="menu_item_name" >
                                     {{cater_item.description}}

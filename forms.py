@@ -50,8 +50,8 @@ class NewCaterItem(FlaskForm):
 
 
 class NewEvent(FlaskForm):
-    name = StringField('Item Name', validators=[DataRequired()])
-    description = TextAreaField('Item Description')
+    name = StringField('Event Name', validators=[DataRequired()])
+    description = TextAreaField('Event Description')
     location = StringField('Location')
     date = DateField('Date', format='%m/%d/%Y')
     start_time = StringField('Start')
