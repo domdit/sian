@@ -22,7 +22,7 @@ class MenuItem(db.Model):
     vegetarian = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f"MenuItem('{self.name}', '{self.description}')"
+        return "MenuItem('{self.name}', '{self.description}')"
 
 
 class CaterItem(db.Model):
@@ -37,7 +37,7 @@ class CaterItem(db.Model):
     vegetarian = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f"CaterItem('{self.name}', '{self.description}')"
+        return "CaterItem('{self.name}', '{self.description}')"
 
 
 class EventItem(db.Model):
@@ -50,4 +50,4 @@ class EventItem(db.Model):
     end_time = db.Column(db.String(100))
 
     def __repr__(self):
-        return f"EventItem('{self.name}', '{self.description}')"
+        return "EventItem('{self.name}', '{self.description}')"
