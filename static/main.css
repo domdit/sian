@@ -140,7 +140,7 @@ h1{
     width: 95%;
     margin-top: 10px;
     padding:10px;
-    background-color: #E2DBAC;
+    background: rgba(255,238,168, 0.3);
     background-image: url("https://www.transparenttextures.com/patterns/subtle-zebra-3d.png");
 }
 
@@ -153,7 +153,7 @@ h1{
 .event_month{
     height: 25px;
     text-color: white;
-    background-color: #AEC957;
+    background-color: #92c24c;
 }
 
 .event_day{
@@ -175,13 +175,15 @@ h1{
 }
 
 .event_text{
-    color: white;
+    color: black;
 }
 
 .btn-primary.custom-btn{
-    background-color: #377C07;
+    background-color: #44813e;
 	border-color: #377C07;
 }
+
+
 
 .logo{
     width: 10%;
