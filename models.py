@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
-        return f"User('{self.email}')"
+        return "User('{self.email}')"
 
 
 class MenuItem(db.Model):
