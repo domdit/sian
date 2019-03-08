@@ -211,7 +211,7 @@ a.nav-item:hover .nav-link {
 }
 
 .custom-item:link{
-    color: #ffffff;
+    color: #000000;
 }
 
 .custom-item:hover{
