@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "layout.html" %}
+
+{%block script%}
+
+{%endblock%}
+
+{% set active_page = "img" %}
+
+{% include "admin_template.html" %}
+
+{% block content %}
+
+<div class="container">
+    <!-- Image Uploader -->
+    <form method="POST" action="" enctype="multipart/form-data">
+
+        {{ img_form.hidden_tag() }}
+        <fieldset class="form-group mt-3">
+            <legend class="border-bottom mb-4">Update Images</legend>
+            <p>Here you can upload an image file and it will display on your
+            page above the menu. You can upload any combination. The display location of the
+            image (on the actual page) depends on which button uploader you use.
+            "Image Uploader 1" will place the image on the leftmost side of your page,
+            while "Image Uploader 4" will place the image on the rightmost.</p>
+
+            <div class="form-group">
+                {{ img_form.img1.label() }}
+                {{ img_form.img1(class="form-control-file") }}
+                {% if img_form.img1.errors %}
+                    {% for error in img_form.img1.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ img_form.img2.label() }}
+                {{ img_form.img2(class="form-control-file") }}
+                {% if img_form.img2.errors %}
+                    {% for error in img_form.img2.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ img_form.img3.label() }}
+                {{ img_form.img3(class="form-control-file") }}
+                {% if img_form.img3.errors %}
+                    {% for error in img_form.img3.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ img_form.img4.label() }}
+                {{ img_form.img4(class="form-control-file") }}
+                {% if img_form.img4.errors %}
+                    {% for error in img_form.img4.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ img_form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

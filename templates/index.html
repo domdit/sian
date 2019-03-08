@@ -91,7 +91,7 @@
 
 
         <div class="col-md">
-            <div class="border rounded pb-2 pr-2 pl-2 pt-1 border-info twitter_container">
+            <div class=" pb-2 pr-2 pl-2 pt-1 border-info twitter_container">
                 <span class="alegreya"><a href="https://twitter.com/{{tweet_user}}" target="_blank">
                     <img height="2.5%" width="2.5%" class="mini_twitter" src="static/img/twitter.png"></a>
                     <b>{{tweet_handle}}</b>: "{{tweet_text}}" ({{tweet_time}})
@@ -108,16 +108,27 @@
         <div class="row">
 
             <div class="col-sm  d-none d-sm-block">
-                <img class="menu_image" src="{{image1}}">
+                <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                    <img src="{{image1}}" class="menu_image">
+                </a>
             </div>
+
             <div class="col-sm  d-none d-sm-block">
-                <img class="menu_image" src="{{image2}}">
+                <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                    <img src="{{image2}}" class="menu_image">
+                </a>
             </div>
+
             <div class="col-sm  d-none d-sm-block">
-                <img class="menu_image" src="{{image3}}">
+                <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                    <img src="{{image3}}" class="menu_image">
+                </a>
             </div>
+
             <div class="col-sm  d-none d-sm-block d-md-none d-lg-block">
-                <img class="menu_image" src="{{image4}}">
+                <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                    <img src="{{image4}}" class="menu_image">
+                </a>
             </div>
 
         <!-- MENU IMAGE SLIDESHOW -->
@@ -127,18 +138,31 @@
                 <div id="demo" class="carousel slide " data-ride="carousel">
 
                     <div class="carousel-inner">
+
                         <div class="carousel-item active">
-                            <img src="{{image1}}" class="menu_image">
+                            <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                                <img src="{{image1}}" class="menu_image">
+                            </a>
                         </div>
+
                         <div class="carousel-item">
-                            <img src="{{image2}}" class="menu_image">
+                            <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                                <img src="{{image2}}" class="menu_image">
+                            </a>
                         </div>
+
                         <div class="carousel-item">
-                            <img src="{{image3}}" class="menu_image">
+                            <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                                <img src="{{image3}}" class="menu_image">
+                            </a>
                         </div>
+
                         <div class="carousel-item">
-                            <img src="{{image4}}" class="menu_image">
+                            <a href="https://www.instagram.com/sianstreetfood/" target="_blank">
+                                <img src="{{image4}}" class="menu_image">
+                            </a>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -166,6 +190,7 @@
 
                 </div>
             </div>
+
             <div class="row">
         {% else %}
 
@@ -219,26 +244,25 @@
 
         <div class="col-lg-4">
 
-            <div class="rounded event_container " >
+            <div class="rounded event_container border rounded" >
 
-                <div class="event_date mr-2 border rounded text-center varela bold float-left">
-
-                    <div class="event_month border-bottom">
-                        NOV
-
-                    </div>
+                <div class="event_date mr-2 border rounded text-center bold float-left">
 
                     <div class="event_day">
                         28
 
                     </div>
 
+                    <div class="event_month">
+                        NOV
+
+                    </div>
 
                 </div>
 
                 <div>
                     <b>Dominic's Birthday</b><br>
-                    <p class="limit">This day is going to be totally sick</p>
+                    <p class="limit">A Bunch of random text to fill space you know</p>
 
                 </div>
 
@@ -246,7 +270,7 @@
 
                     <button class="btn-primary custom-btn rounded float-right event_button"
                             data-toggle="modal" data-target="#exampleModalCenter">
-                        Read More
+                        More Info
                     </button>
 
                 </div>
@@ -255,79 +279,7 @@
 
         </div>
 
-        <div class="col-lg-4">
-
-            <div class="rounded event_container" >
-
-                <div class="event_date mr-2 border rounded text-center varela bold float-left">
-
-                    <div class="event_month border-bottom">
-                        NOV
-
-                    </div>
-
-                    <div class="event_day ">
-                        28
-
-                    </div>
-
-
-                </div>
-
-                <div class="event_text">
-                    <b>Dominic's Birthday</b><br>
-                    <p class="limit">This day is going to be totally sick</p>
-
-                </div>
-
-                <div>
-
-                    <button class="btn-primary custom-btn rounded float-right event_button">Read More</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-lg-4">
-
-            <div class="rounded event_container" >
-
-                <div class="event_date mr-2 border rounded text-center varela bold float-left">
-
-                    <div class="event_month border-bottom">
-                        NOV
-
-                    </div>
-
-                    <div class="event_day ">
-                        28
-
-                    </div>
-
-
-                </div>
-
-                <div>
-                    <b>Dominic's Birthday</b><br>
-                    <p class="limit">This day is going to be totally sick</p>
-
-                </div>
-
-                <div>
-
-                    <button class="btn-primary custom-btn rounded float-right event_button">Read More</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
-
-
 
     <!-- this row is necessary for proper landing space when contact link is clicked -->
     <div class="row">

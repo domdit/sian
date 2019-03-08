@@ -1,8 +1,14 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, TextAreaField, SubmitField, BooleanField, PasswordField
+from wtforms import StringField, TextAreaField, SubmitField, BooleanField, PasswordField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from siamsite.models import User
+
+
+class Login(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
 
 
 class NewAdmin(FlaskForm):
@@ -22,12 +28,6 @@ class NewAdmin(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 
-class Login(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
-
-
 class NewItem(FlaskForm):
     name = StringField('Item Name', validators=[DataRequired()])
     description = TextAreaField('Item Description')
@@ -35,6 +35,27 @@ class NewItem(FlaskForm):
     head = BooleanField('Heading')
     spice = BooleanField('Spicy')
     veg = BooleanField('Vegetarian')
+    submit = SubmitField('Add Item')
+
+
+class NewCaterItem(FlaskForm):
+    name = StringField('Item Name', validators=[DataRequired()])
+    description = TextAreaField('Item Description')
+    whole = StringField('Whole Price')
+    half = StringField('Half Price')
+    head = BooleanField('Heading')
+    spice = BooleanField('Spicy')
+    veg = BooleanField('Vegetarian')
+    submit = SubmitField('Add Item')
+
+
+class NewEvent(FlaskForm):
+    name = StringField('Item Name', validators=[DataRequired()])
+    description = TextAreaField('Item Description')
+    location = StringField('Location')
+    date = DateField('Date', format='%m/%d/%Y')
+    start_time = StringField('Start')
+    end_time = StringField('End')
     submit = SubmitField('Add Item')
 
 

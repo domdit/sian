@@ -4,9 +4,9 @@ from flask import render_template, flash, redirect, url_for, request, make_respo
 from flask_mail import Message
 from flask_login import login_user, current_user, logout_user, login_required
 from siamsite import app, mail, db, bcrypt
-from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin
+from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent
 from siamsite.utils import Twitter, save_picture
-from siamsite.models import MenuItem, User
+from siamsite.models import MenuItem, User, CaterItem, EventItem
 from datetime import datetime
 
 
@@ -50,7 +50,8 @@ def index():
     return render_template('index.html', title='Sian Street Food', form=form, year=year, items=items,
                            tweet_handle=handle, tweet_text=text, tweet_time=time, tweet_user=twitter_user_name,
                            image1=menu_image_list[0], image2=menu_image_list[1],
-                           image3=menu_image_list[2], image4=menu_image_list[3])
+                           image3=menu_image_list[2], image4=menu_image_list[3],
+                           )
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -79,7 +80,7 @@ def logout():
 
 
 @app.route("/admin", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def admin():
 
     menu_form = NewItem()
@@ -94,7 +95,63 @@ def admin():
         db.session.commit()
         flash('You successfully added a new menu item!', 'success')
         return redirect(url_for('admin'))
+
     items = MenuItem.query.order_by(MenuItem.rank.asc())
+
+    return render_template('admin.html', title='Manage Menu - SSF Admin',
+                           menu_form=menu_form, items=items)
+
+
+@app.route("/admin/catering", methods=['GET', 'POST'])
+@login_required
+def cater_menu():
+
+    cater_form = NewCaterItem()
+    if cater_form.validate_on_submit():
+        cater_item = CaterItem(name=cater_form.name.data,
+                               description=cater_form.description.data,
+                               whole=cater_form.whole.data,
+                               half=cater_form.half.data,
+                               head=cater_form.head.data,
+                               spice=cater_form.spice.data,
+                               vegetarian=cater_form.veg.data)
+        db.session.add(cater_item)
+        db.session.commit()
+        flash('You successfully added a new catering menu item!', 'success')
+        return redirect(url_for('cater_menu'))
+
+    cater_items = CaterItem.query.order_by(CaterItem.rank.asc())
+
+    return render_template('cater.html', title='Manage Catering Menu - SSF Admin',
+                           cater_form=cater_form, cater_items=cater_items)
+
+
+@app.route("/admin/event", methods=['GET', 'POST'])
+@login_required
+def new_event():
+
+    event_form = NewEvent()
+    if event_form.validate_on_submit():
+        event_item = EventItem(name=event_form.name.data,
+                               location=event_form.location.data,
+                               description=event_form.description.data,
+                               date=event_form.date.data,
+                               start_time=event_form.start_time.data,
+                               end_time=event_form.end_time.data)
+        db.session.add(event_item)
+        db.session.commit()
+        flash('You successfully added a new event!', 'success')
+        return redirect(url_for('new_event'))
+
+    event_items = EventItem.query.order_by(EventItem.date.asc())
+
+    return render_template('event.html', title='Manage Events - SSF Admin',
+                           event_form=event_form, event_items=event_items)
+
+
+@app.route("/admin/image_uploader", methods=['GET', 'POST'])
+@login_required
+def image_uploader():
 
     img_form = Image()
     if img_form.validate_on_submit():
@@ -113,6 +170,14 @@ def admin():
 
         flash('You successfully uploaded and posted your image(s)!', 'success')
 
+    return render_template('image_uploader.html', title='Manage Images - SSF Admin',
+                           img_form=img_form)
+
+
+@app.route("/admin/new_admin", methods=['GET', 'POST'])
+@login_required
+def new_admin():
+
     new_form = NewAdmin()
     if new_form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(new_form.password.data).decode('utf-8')
@@ -121,19 +186,29 @@ def admin():
         db.session.add(user)
         db.session.commit()
         flash('New administrative account created', 'success')
-        return redirect(url_for('admin'))
+        return redirect(url_for('new_admin'))
 
-    return render_template('admin.html', title='Sian Street Food - Admin Page',
-                           img_form=img_form, new_form=new_form, menu_form=menu_form, items=items,)
+    return render_template('new_admin.html', title='Manage Admins - SSF Admin',
+                           new_form=new_form)
 
 
-@app.route("/item/<int:item_id>/delete", methods=['GET', 'POST'])
-def delete_item(item_id):
-    item = MenuItem.query.get_or_404(item_id)
+@app.route("/item/<int:item_id>/<table>/<location>/delete", methods=['GET', 'POST'])
+def delete_item(item_id, table, location):
+
+    if table == 'MenuItem':
+        item = MenuItem.query.get_or_404(item_id)
+    elif table == 'CaterItem':
+        item = CaterItem.query.get_or_404(item_id)
+    elif table == 'EventItem':
+        item = EventItem.query.get_or_404(item_id)
+    else:
+        flash('Delete failed, try again', 'danger')
+        return redirect(url_for(location))
+
     db.session.delete(item)
     db.session.commit()
     flash('Your menu item has been deleted!', 'success')
-    return redirect(url_for('admin'))
+    return redirect(url_for(location))
 
 
 @app.route("/post", methods=['POST'])
@@ -154,13 +229,27 @@ def post():
 
     flash('You have succesfully re-ordered and posted the menu to the website!')
 
-    full_menu = MenuItem.query.order_by(MenuItem.rank.desc())
-
     return res
 
-@app.route("/event")
-def event():
-    return render_template('event.html', title="suck my tits")
+@app.route("/cater_post", methods=['POST'])
+def cater_post():
+
+    id_array = request.get_json()
+    print(id_array)
+    res = make_response(jsonify({"so glad": "It worked"}), 200)
+
+    list_rank = 1
+    for id in id_array:
+
+        item = CaterItem.query.get(id)
+        item.rank = list_rank
+        db.session.commit()
+        print(item.name + " " + str(item.rank))
+        list_rank += 1
+
+    flash('You have succesfully re-ordered and posted the menu to the website!')
+
+    return res
 
 
 

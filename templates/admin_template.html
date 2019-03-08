@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<style>
+    body{
+
+        background-color: #00878c;
+        background-image: url("https://www.transparenttextures.com/patterns/black-thread.png");
+
+    }
+
+</style>
+
+    <div class="container border-left border-right bg-white" style="height:auto;">
+
+        <div class="">
+            <img src="/static/img/seal.png" style="width:75px; height: auto;" class="float-left mt-1 mr-2">
+
+            <h1>Sian Street Food - Admin Tools</h1>
+
+            <hr>
+
+        </div>
+
+        <div class="list-group m-3 admin-link">
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'menu' else '' }}"
+               href="{{url_for('admin')}}">Manage Main Menu</a>
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'cater' else '' }}"
+               href="{{url_for('cater_menu')}}">Manage Catering Menu</a>
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'event' else '' }}"
+               href="{{url_for('new_event')}}">Manage Events</a>
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'img' else '' }}"
+               href="{{url_for('image_uploader')}}">Update Images</a>
+
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'admin' else '' }}"
+               href="{{url_for('new_admin')}}">Create New Administrative Account</a>
+
+            <a class="list-group-item py-1 list-group-item-action"
+               href="{{url_for('logout')}}">Logout</a>
+
+        </div>
+
+

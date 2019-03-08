@@ -140,27 +140,33 @@ h1{
     width: 95%;
     margin-top: 10px;
     padding:10px;
-    background: rgba(255,238,168, 0.3);
-    background-image: url("https://www.transparenttextures.com/patterns/subtle-zebra-3d.png");
+    background-color: #fffafa;
+    background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
+}
+
+.event_modal_bg{
+    background-color: #fffafa;
+    background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
+
 }
 
 .event_date{
     height:95%;
     width:65px;
-    background-color: #ffffff;
+    background-color: #c62625;
+    color: white;
 }
 
 .event_month{
     height: 25px;
-    text-color: white;
-    background-color: #92c24c;
+    background-color: #c62625;
+    color: white;
+    margin-top: -15px;
 }
 
 .event_day{
-    margin-top: -7px;
     font-size: 40px;
-
-
+    margin-top: -3px;
 }
 
 .limit{
@@ -179,11 +185,14 @@ h1{
 }
 
 .btn-primary.custom-btn{
-    background-color: #44813e;
-	border-color: #377C07;
+    background-color: #24C5C6;
+	border-color: #24C5C6;
 }
 
-
+.btn-primary.custom-btn:hover{
+    background-color: #2464C6;
+	border-color: #2464C6;
+}
 
 .logo{
     width: 10%;
@@ -220,4 +229,6 @@ a.nav-item:hover .nav-link {
     text-decoration: none;
 }
 
-
+.admin-link{
+    max-width: 300px;
+}

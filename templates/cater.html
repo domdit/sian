@@ -1,10 +1,198 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<!--
+This page is separate from the main admin page for these reasons:
+1. for some reason, having both forms on the same page was creating confusion in the
+    databases, perhaps due to my negligence, but a simple copy and paste into a new
+    html page worked flawlessly
+2. it allowed me to reuse the JS postSave() function, rather than writing a second one
+    only to change the fetch line from /post to cater_post (maybe there is an easier
+    way to do that?)
+3. adding an item to the catering menu would refresh the page, resulting
+    in the user having to scroll down. While there are ways around this issue, I
+    decided giving the management of the catering menu its own page would be cleaner
+-->
+
+{% extends "layout.html" %}
+
+{%block script%}
+
+    <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <script>
+        $( document ).ready(function() {
+             console.log( "ready!" );
+        });
+
+        $(function() {
+            $( ".sortable" ).sortable({
+                update: function(event, ui) {
+                    var postData = $(this).sortable('serialize');
+
+
+
+                }
+            });
+        });
+
+        function postSave() {
+
+            var list = [];
+
+            $('.kore').each(function (index) {
+                list.push(this.id);
+            });
+
+            console.log(list)
+
+            fetch(`${window.origin}/post`, {
+                method: 'POST',
+                credentials: "include",
+                body: JSON.stringify(list),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            })
+            .then(function(response) {
+
+                if (response.status !== 200) {
+                    console.log(`RESPONSE STATUS WAS NOT 200: ${response.status}`);
+                    return;
+                }
+
+                response.json().then( function (list) {
+                console.log(list)
+                });
+            })
+            .catch(function(error) {
+                console.log("Fetch error: " + error);
+
+            });
+
+        };
+
+    </script>
+
+{%endblock%}
+
+{% set active_page = "cater" %}
+
+{% include "admin_template.html" %}
+
+{% block content %}
+
+
+        <!-- CATER MENU FORM -->
+        <div class="container mt-3">
+
+            <form action="" method="POST">
+                {{ cater_form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Manage Catering Menu</legend>
+                        <div class="form-group">
+                            {{ cater_form.name.label(class="form-control-label") }}
+                            {{ cater_form.name(class="form-control form-control-lg") }}
+                        </div>
+                        <div class="form-group">
+                            {{ cater_form.description.label(class="form-control-label") }}
+                            {{ cater_form.description(class="form-control form-control-lg") }}
+                        </div>
+                        <div class="row mb-2">
+                            <div class="form-check col-6">
+                                {{ cater_form.whole.label(class="form-control-label" ) }}
+                                {{ cater_form.whole(class="form-control form-control-lg") }}
+                            </div>
+
+                            <div class="form-check col-6">
+                                {{ cater_form.half.label(class="form-control-label" ) }}
+                                {{ cater_form.half(class="form-control form-control-lg") }}
+                            </div>
+                        </div>
+                        <div class="form-check">
+                            {{ cater_form.head(class="form-check-input") }}
+                            {{ cater_form.head.label(class="form-check-label") }}
+                            <small>(Description will appear to the right of the heading)</small>
+                        </div>
+                        <div class="form-check">
+                            {{ cater_form.spice(class="form-check-input") }}
+                            {{ cater_form.spice.label(class="form-check-label") }}
+                            <i class="fas fa-pepper-hot text-danger"></i>
+                        </div>
+                        <div class="form-check">
+                            {{ cater_form.veg(class="form-check-input") }}
+                            {{ cater_form.veg.label(class="form-check-label") }}
+                            <i class="fas fa-leaf text-success"></i>
+                        </div>
+
+                </fieldset>
+                <div class="form_group">
+                    {{ cater_form.submit(class="btn btn-secondary") }}
+                </div>
+            </form>
+        </div>
+
+        <!-- CATER MENU ITEMS -->
+
+        <div class="container menu">
+            <ul class="sortable">
+                {% for cater_item in cater_items %}
+
+                <li class="nobull kore" id="{{ cater_item.id }}">
+                    <div class="menu_item">
+                        {% if cater_item.head == True %}
+                        <div>
+                            <div class="menu_heading">
+                                {{ cater_item.name }}
+
+                                <small class="menu_item_name" >
+                                    {{cater_item.description}}
+                                </small>
+
+                            </div>
+
+                            <a href="{{ url_for('delete_item', item_id=cater_item.id, table='CaterItem', location='cater_menu') }}">Delete</a>
+
+                        </div>
+                {% else %}
+                    <div class="col">
+                        <div class="menu_item_name">
+                            {{ cater_item.name }}
+
+                            {% if cater_item.whole %}
+                                <div class="float-right">
+                                    {{cater_item.whole}}/{{cater_item.half}}
+                                </div>
+                            {%endif%}
+
+                            {% if cater_item.spice %}
+                                <small><i class="fas fa-pepper-hot text-danger"></i></small>
+                            {%endif%}
+                            {% if cater_item.vegetarian %}
+                                <small><i class="fas fa-leaf text-success"></i></small>
+                            {%endif%}
+
+                        </div>
+
+                        <div class="menu_item_description">
+                            {{ cater_item.description }}
+                        </div>
+
+                        <a href="{{ url_for('delete_item', item_id=cater_item.id, table='CaterItem', location='cater_menu') }}">Delete</a>
+
+                    </div>
+
+                {% endif %}
+
+                    </div>
+                </li>
+                {% endfor %}
+
+            </ul>
+            <button class="btn btn-outline-info" onclick="postSave()">Save & Post Menu</button><br>
+        </div>
+<br>
+<br>
+
+
+
+{% endblock %}

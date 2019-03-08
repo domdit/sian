@@ -1,5 +1,6 @@
 from siamsite import db
 from flask_login import UserMixin
+from datetime import *
 
 
 class User(db.Model, UserMixin):
@@ -21,7 +22,32 @@ class MenuItem(db.Model):
     vegetarian = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f"MenuItems('{self.name}', '{self.description}')"
+        return f"MenuItem('{self.name}', '{self.description}')"
 
 
+class CaterItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), unique=False, nullable=False)
+    description = db.Column(db.Text)
+    rank = db.Column(db.Integer)
+    whole = db.Column(db.String(10), unique=False)
+    half = db.Column(db.String(10), unique=False)
+    head = db.Column(db.Boolean, default=False)
+    spice = db.Column(db.Boolean, default=False)
+    vegetarian = db.Column(db.Boolean, default=False)
 
+    def __repr__(self):
+        return f"CaterItem('{self.name}', '{self.description}')"
+
+
+class EventItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(100), unique=False, nullable=False)
+    location = db.Column(db.String(500), unique=False, nullable=False)
+    description = db.Column(db.Text)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
+    start_time = db.Column(db.String(100))
+    end_time = db.Column(db.String(100))
+
+    def __repr__(self):
+        return f"EventItem('{self.name}', '{self.description}')"

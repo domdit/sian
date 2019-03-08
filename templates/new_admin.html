@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "layout.html" %}
+
+{%block script%}
+
+{%endblock%}
+
+{% set active_page = "admin" %}
+
+{% include "admin_template.html" %}
+
+{% block content %}
+
+<div class="container">
+    <form method="POST" action="">
+        {{ new_form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Create New Administrative Account</legend>
+            <div class="new_admin">
+            <div class="form-group ">
+                {{ new_form.email.label(class="form-control-label") }}
+                {% if new_form.email.errors %}
+                    {{ new_form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in new_form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ new_form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ new_form.password.label(class="form-control-label") }}
+                {% if new_form.password.errors %}
+                    {{ new_form.password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in new_form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ new_form.password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ new_form.confirm_password.label(class="form-control-label") }}
+                {% if new_form.confirm_password.errors %}
+                    {{ new_form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in new_form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ new_form.confirm_password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+                </div>
+        </fieldset>
+        <div class="form-group">
+            {{ new_form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

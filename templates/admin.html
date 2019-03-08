@@ -11,7 +11,7 @@
         });
 
         $(function() {
-            $( "#sortable" ).sortable({
+            $( ".sortable" ).sortable({
                 update: function(event, ui) {
                     var postData = $(this).sortable('serialize');
 
@@ -62,228 +62,101 @@
 
 {%endblock%}
 
+{% set active_page = "menu" %}
+
+{% include "admin_template.html" %}
+
 {% block content %}
 
-<div class="bg-light" style="height:100%">
-    <div class="container border-left border-right bg-white">
-
-        <div class="">
-            <h1>Sian Street Food - Admin Page</h1>
-
-            <hr>
-
-        </div>
-
-        <div>
-
-            <ul>
-            <li><a href="#">Manage Menu</a></li>
-            <li><a href="#">Update Images</a></li>
-            <li><a href="#">Create New Administrative Account</a></li>
-            <li><a href="{{url_for('logout')}}">Logout</a></li>
-            </ul>
-
-        </div>
-
-        <!-- MENU FORM -->
-        <div class="container">
-            <form action="" method="POST">
-                {{ menu_form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Manage Menu</legend>
-                        <div class="form-group">
-                            {{ menu_form.name.label(class="form-control-label") }}
-                            {{ menu_form.name(class="form-control form-control-lg") }}
-                        </div>
-                        <div class="form-group">
-                            {{ menu_form.description.label(class="form-control-label") }}
-                            {{ menu_form.description(class="form-control form-control-lg") }}
-                        </div>
-                        <div class="form-check">
-                            {{ menu_form.head(class="form-check-input") }}
-                            {{ menu_form.head.label(class="form-check-label") }}
-                            <small>(Description will appear to the right of the heading)</small>
-                        </div>
-                        <div class="form-check">
-                            {{ menu_form.spice(class="form-check-input") }}
-                            {{ menu_form.spice.label(class="form-check-label") }}
-                            <i class="fas fa-pepper-hot text-danger"></i>
-                        </div>
-                        <div class="form-check">
-                            {{ menu_form.veg(class="form-check-input") }}
-                            {{ menu_form.veg.label(class="form-check-label") }}
-                            <i class="fas fa-leaf text-success"></i>
-                        </div>
-
-                </fieldset>
-                <div class="form_group">
-                    {{ menu_form.submit(class="btn btn-secondary") }}
-                </div>
-            </form>
-        </div>
-
-        <!-- MENU ITEMS -->
-
-        <div class="container menu">
-            <ul id="sortable">
-                {% for item in items %}
-
-                <li class="nobull kore" id="{{ item.id }}">
-                    <div class="menu_item">
-                        {% if item.head == True %}
-                        <div>
-                            <div class="menu_heading">
-                                {{ item.name }}
-
-                                <small class="menu_item_name" >
-                                    {{item.description}}
-                                </small>
-
-                            </div>
-                            <a href="{{ url_for('delete_item', item_id=item.id) }}">Delete</a>
-
-                        </div>
-                {% else %}
-                    <div class="col">
-                        <div class="menu_item_name">
-                            {{ item.name }}
-                            {% if item.spice %}
-                                <small><i class="fas fa-pepper-hot text-danger"></i></small>
-                            {%endif%}
-                            {% if item.vegetarian %}
-                                <small><i class="fas fa-leaf text-success"></i></small>
-                            {%endif%}
-
-                        </div>
-
-                        <div class="menu_item_description">
-                            {{ item.description }}
-                        </div>
-
-                        <a href="{{ url_for('delete_item', item_id=item.id) }}">Delete</a>
-
-                    </div>
-
-                {% endif %}
-
-                    </div>
-                </li>
-                {% endfor %}
-
-            </ul>
-            <button class="btn btn-outline-info" onclick="postSave()">Save & Post Menu</button><br>
-        </div>
-
-
-        <form method="POST" action="" enctype="multipart/form-data">
-
-            {{ img_form.hidden_tag() }}
-            <fieldset class="form-group mt-3">
-                <legend class="border-bottom mb-4">Update Images</legend>
-                <p>Here you can upload an image file and it will display on your
-                page above the menu. You can upload any combination. The display location of the
-                image (on the actual page) depends on which button uploader you use.
-                "Image Uploader 1" will place the image on the leftmost side of your page,
-                while "Image Uploader 4" will place the image on the rightmost.</p>
-
-                <div class="form-group">
-                    {{ img_form.img1.label() }}
-                    {{ img_form.img1(class="form-control-file") }}
-                    {% if img_form.img1.errors %}
-                        {% for error in img_form.img1.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ img_form.img2.label() }}
-                    {{ img_form.img2(class="form-control-file") }}
-                    {% if img_form.img2.errors %}
-                        {% for error in img_form.img2.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ img_form.img3.label() }}
-                    {{ img_form.img3(class="form-control-file") }}
-                    {% if img_form.img3.errors %}
-                        {% for error in img_form.img3.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ img_form.img4.label() }}
-                    {{ img_form.img4(class="form-control-file") }}
-                    {% if img_form.img4.errors %}
-                        {% for error in img_form.img4.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </fieldset>
-            <div class="form-group">
-                {{ img_form.submit(class="btn btn-outline-info") }}
-            </div>
-        </form>
-
-
-        <form method="POST" action="">
-            {{ new_form.hidden_tag() }}
+    <!-- MENU FORM -->
+    <div class="container">
+        <form action="" method="POST">
+            {{ menu_form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Create New Administrative Account</legend>
-                <div class="new_admin">
-                <div class="form-group ">
-                    {{ new_form.email.label(class="form-control-label") }}
-                    {% if new_form.email.errors %}
-                        {{ new_form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in new_form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ new_form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ new_form.password.label(class="form-control-label") }}
-                    {% if new_form.password.errors %}
-                        {{ new_form.password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in new_form.password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ new_form.password(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ new_form.confirm_password.label(class="form-control-label") }}
-                    {% if new_form.confirm_password.errors %}
-                        {{ new_form.confirm_password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in new_form.confirm_password.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ new_form.confirm_password(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
+                <legend class="border-bottom mb-4">Manage Main Menu</legend>
+                    <div class="form-group">
+                        {{ menu_form.name.label(class="form-control-label") }}
+                        {{ menu_form.name(class="form-control form-control-lg") }}
                     </div>
+                    <div class="form-group">
+                        {{ menu_form.description.label(class="form-control-label") }}
+                        {{ menu_form.description(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-check">
+                        {{ menu_form.head(class="form-check-input") }}
+                        {{ menu_form.head.label(class="form-check-label") }}
+                        <small>(Description will appear to the right of the heading)</small>
+                    </div>
+                    <div class="form-check">
+                        {{ menu_form.spice(class="form-check-input") }}
+                        {{ menu_form.spice.label(class="form-check-label") }}
+                        <i class="fas fa-pepper-hot text-danger"></i>
+                    </div>
+                    <div class="form-check">
+                        {{ menu_form.veg(class="form-check-input") }}
+                        {{ menu_form.veg.label(class="form-check-label") }}
+                        <i class="fas fa-leaf text-success"></i>
+                    </div>
+
             </fieldset>
-            <div class="form-group">
-                {{ new_form.submit(class="btn btn-outline-info") }}
+            <div class="form_group">
+                {{ menu_form.submit(class="btn btn-secondary") }}
             </div>
-
         </form>
-
-
-        </form>
-
     </div>
-</div>
+
+    <!-- MENU ITEMS -->
+
+    <div class="container menu">
+        <ul class="sortable">
+            {% for item in items %}
+
+            <li class="nobull kore" id="{{ item.id }}">
+                <div class="menu_item">
+                    {% if item.head == True %}
+                    <div>
+                        <div class="menu_heading">
+                            {{ item.name }}
+
+                            <small class="menu_item_name" >
+                                {{item.description}}
+                            </small>
+
+                        </div>
+
+                        <a href="{{ url_for('delete_item', item_id=item.id, table='MenuItem', location='admin') }}">Delete</a>
+
+                    </div>
+            {% else %}
+                <div class="col">
+                    <div class="menu_item_name">
+                        {{ item.name }}
+                        {% if item.spice %}
+                            <small><i class="fas fa-pepper-hot text-danger"></i></small>
+                        {%endif%}
+                        {% if item.vegetarian %}
+                            <small><i class="fas fa-leaf text-success"></i></small>
+                        {%endif%}
+
+                    </div>
+
+                    <div class="menu_item_description">
+                        {{ item.description }}
+                    </div>
+
+                    <a href="{{ url_for('delete_item', item_id=item.id, table='MenuItem', location='admin') }}">Delete</a>
+
+                </div>
+
+            {% endif %}
+
+                </div>
+            </li>
+            {% endfor %}
+
+        </ul>
+        <button class="btn btn-outline-info" onclick="postSave()">Save & Post Menu</button><br>
+    </div>
+
 {% endblock content %}
+
