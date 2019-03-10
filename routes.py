@@ -2,16 +2,13 @@ from __future__ import unicode_literals
 import os
 from flask import render_template, flash, redirect, url_for, request, make_response, jsonify
 from flask_mail import Message
-from flask_login import login_user, current_user, logout_user, login_required, LoginManager
+from flask_login import login_user, current_user, logout_user, login_required, login_manager
 from siamsite import app, mail, db, bcrypt
 from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent
 from siamsite.utils import Twitter, save_picture
 from siamsite.models import MenuItem, User, CaterItem, EventItem
 from datetime import datetime
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "login"
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
