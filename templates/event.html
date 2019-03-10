@@ -72,86 +72,88 @@
 
         <div class="row">
 
-            {% for event_item in event_items %}
+        {% for event_item in event_items %}
 
-                <div class="col-4">
+            <div class="col-md-4">
 
-                    <div class="rounded event_container border rounded" >
+            <div class="rounded event_container border rounded" >
 
-                        <div class="event_date mr-2 border rounded text-center bold float-left">
+                <div class="event_date mr-2 border rounded text-center bold float-left">
 
-                            <div class="event_day">
-                                {{ event_item.date.strftime('%d') }}
-
-                            </div>
-
-                            <div class="event_month">
-                                {{ event_item.date.strftime('%b')}}
-
-                            </div>
-
-                        </div>
-
-                        <div class="limit">
-                            <b> {{ event_item.name }} </b><br>
-                            <p class="limit">{{ event_item.description }}</p>
-
-                        </div>
-
-                        <div>
-
-                            <button class="btn-primary custom-btn rounded float-right event_button"
-                                    data-toggle="modal" data-target="#modal{{event_item.id}}">
-                                More Info
-                            </button>
-
-                        </div>
+                    <div class="event_day">
+                        {{ event_item.date.strftime('%d') }}
 
                     </div>
 
-                    <a href="{{ url_for('delete_item', item_id=event_item.id, table='EventItem', location='new_event') }}">Delete</a>
-
-                </div>
-
-
-                <div class="modal fade" id="modal{{event_item.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-                    <div class="modal-dialog" role="document">
-
-                        <div class="modal-content">
-
-                            <div class="modal-header event_modal_bg">
-                                <h5 class="modal-title" id="exampleModalLabel">{{event_item.name}}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="modal-body">
-
-                                <div class="container">
-                                    <i class="far fa-clock mr-2"></i> {{ event_item.start_time }} -  {{ event_item.end_time }} <br>
-                                    <i class="far fa-calendar-alt mr-2"></i> {{ event_item.date.strftime('%m/%d/%Y') }} <br>
-                                    <i class="fas fa-map-marker-alt mr-2"></i> <a target="_blank" href="https://maps.google.com/?q={{event_item.location}}"> {{event_item.location}}</a> <br>
-                                    <br>
-                                    {{ event_item.description }}
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer event_modal_bg">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-
-                        </div>
+                    <div class="event_month">
+                        {{ event_item.date.strftime('%b')}}
 
                     </div>
 
                 </div>
 
-            {% endfor %}
+                <div class="limit">
+                    <b> {{ event_item.name }} </b><br>
+                    <p class="limit">{{ event_item.description }}</p>
+
+                </div>
+
+                <div>
+
+                    <button class="btn-primary custom-btn rounded float-right event_button"
+                            data-toggle="modal" data-target="#modal{{event_item.id}}">
+                        More Info
+                    </button>
+
+                </div>
+
+            </div>
+
+            <a href="{{ url_for('delete_item', item_id=event_item.id, table='EventItem', location='new_event') }}">Delete</a>
 
         </div>
+
+
+
+            <div class="modal fade" id="modal{{event_item.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-header event_modal_bg">
+                        <h5 class="modal-title" id="exampleModalLabel">{{event_item.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="container">
+                            <i class="far fa-clock mr-2"></i> {{ event_item.start_time }} -  {{ event_item.end_time }} <br>
+                            <i class="far fa-calendar-alt mr-2"></i> {{ event_item.date.strftime('%m/%d/%Y') }} <br>
+                            <i class="fas fa-map-marker-alt mr-2"></i> <a target="_blank" href="https://maps.google.com/?q={{event_item.location}}"> {{event_item.location}}</a> <br>
+                            <br>
+                            {{ event_item.description }}
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer event_modal_bg">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+</div>
+
+
 
 
 
