@@ -25,9 +25,9 @@ def index():
 
     # Handling image file names
     menu_image_list = []
-    for root, dirs, files in os.walk('/static/img/menu/'):
+    for root, dirs, files in os.walk('static/img/menu/'):
         for filename in files:
-            x = os.path.join('/static/img/menu/', filename)
+            x = os.path.join('static/img/menu/', filename)
             menu_image_list.append(x)
 
     # Menu Items
