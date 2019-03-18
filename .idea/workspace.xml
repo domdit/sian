@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2a8010d2-83df-4bd6-aa2f-ca0e4f8d49b3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/siamsite/.gitignore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/environment.env" beforeDir="false" afterPath="$PROJECT_DIR$/environment.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/site.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/egg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/egg.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/jiaozi.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/jiaozi.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/meat.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/meat.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/menu/image_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/menu/image_1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/menu/image_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/menu/image_2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/menu/image_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/menu/image_3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/menu/image_4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/menu/image_4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/monique.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/monique.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/seal.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/seal.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/socicon/email.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/socicon/email.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/socicon/facebook.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/socicon/facebook.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/socicon/instagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/socicon/instagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/socicon/snapchat.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/socicon/snapchat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/socicon/twitter.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/socicon/twitter.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/tatami.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/tatami.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/img/twitter.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/twitter.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/admin_template.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_template.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/booking.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/booking.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/cater.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/cater.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/event.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/event.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/image_uploader.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/image_uploader.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/templates/new_admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/new_admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/siamsite/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site.db" beforeDir="false" afterPath="$PROJECT_DIR$/site.db" afterDir="false" />
-    </list>
+    <list default="true" id="2a8010d2-83df-4bd6-aa2f-ca0e4f8d49b3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
