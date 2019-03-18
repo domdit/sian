@@ -3,7 +3,7 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, TextAreaField, IntegerField, SubmitField, BooleanField, PasswordField, DateField
 from wtforms.fields.html5 import TelField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from siamsite.models import User
+from models import User
 
 
 class Login(FlaskForm):

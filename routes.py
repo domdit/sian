@@ -2,11 +2,11 @@ from __future__ import unicode_literals
 import os
 from flask import render_template, flash, redirect, url_for, request, make_response, jsonify
 from flask_mail import Message
-from flask_login import login_user, current_user, logout_user, login_required, login_manager
+from flask_login import login_user, current_user, logout_user, login_required
 from siamsite import app, mail, db, bcrypt
-from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent, CaterOrder, AboutForm
-from siamsite.utils import Twitter, save_picture
-from siamsite.models import MenuItem, User, CaterItem, EventItem, About
+from forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent, CaterOrder, AboutForm
+from utils import Twitter, save_picture
+from models import MenuItem, User, CaterItem, EventItem, About
 from datetime import datetime
 
 
