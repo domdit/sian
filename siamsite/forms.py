@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, TextAreaField, SubmitField, BooleanField, PasswordField, DateField
+from wtforms import StringField, TextAreaField, IntegerField, SubmitField, BooleanField, PasswordField, DateField
+from wtforms.fields.html5 import TelField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from siamsite.models import User
 
@@ -49,6 +50,20 @@ class NewCaterItem(FlaskForm):
     submit = SubmitField('Add Item')
 
 
+class CaterOrder(FlaskForm):
+    customer_first = StringField('First Name', validators=[DataRequired()])
+    customer_last = StringField('Last Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    phone = TelField('Phone Number', validators=[DataRequired()])
+    date = DateField('Date', format='%m/%d/%Y', validators=[DataRequired()])
+    start_time = StringField('Start Time', validators=[DataRequired()])
+    end_time = StringField('End Time', validators=[DataRequired()])
+    guest_count = IntegerField('Number of Guests', validators=[DataRequired()])
+    location = StringField('Address', validators=[DataRequired()])
+
+    info = TextAreaField('Additional Info')
+    submit = SubmitField('Submit')
+
 class NewEvent(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])
     description = TextAreaField('Event Description')
@@ -73,3 +88,10 @@ class Contact(FlaskForm):
     subject = StringField('Subject')
     message = TextAreaField('Message', validators=[DataRequired()])
     submit = SubmitField('Send Email')
+
+
+class AboutForm(FlaskForm):
+    about = TextAreaField('About Us', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
+

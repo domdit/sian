@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{%block script%}
+
+{%endblock%}
+
+{% set active_page = "about" %}
+
+{% include "admin_template.html" %}
+
+{% block content %}
+
+<div class="container" >
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Manage About Us Section</legend>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            {{ form.about.label(class="form-control-label") }}
+                            {{ form.about(class="form-control form-control-md") }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+        </fieldset>
+        <div class="form_group">
+            {{ form.submit(class="btn btn-secondary") }}
+        </div>
+    </form>
+
+    <h4>Current About Us</h4>
+
+    <div class="container pb-3">
+        {% for item in about %}
+            {{item.text}}
+        {% endfor %}
+    </div>
+
+
+
+{% endblock %}
+</div>

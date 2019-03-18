@@ -50,4 +50,12 @@ class EventItem(db.Model):
     end_time = db.Column(db.String(100))
 
     def __repr__(self):
-        return "EventItem('{self.name}', '{self.description}')"
+        return "EventItem('{self.name}', '{self.location}')"
+
+
+class About(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    text = db.Column(db.Text, nullable=False)
+
+    def __repr__(self):
+        return "About('{self.id}', '{self.text}')"

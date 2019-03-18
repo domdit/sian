@@ -1,0 +1,293 @@
+{% extends "layout.html" %}
+
+{% block script %}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
+
+{% endblock %}
+
+{% block content %}
+
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white border-bottom">
+    <div class="container">
+        <img src="static/img/seal.png"  class="mini_logo">
+        <div class="mx-auto">
+        <a class="navbar-brand varela" href="/">sian<small class="text-muted">STREETFOOD</small></a>
+        </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse"  id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item custom-item" href="/#menu">Menu</a>
+                <a class="nav-item custom-item" href="/#about">About</a>
+                <a class="nav-item custom-item" href="/#events">Events</a>
+                <a class="nav-item custom-item" href="/#cater">Catering</a>
+                <a class="nav-item custom-item" href="{{url_for('booking')}}">Book Us</a>
+                <a class="nav-item custom-item" href="/#contact">Contact</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin-top:60px;">
+
+    <a name="events" >
+        <h1>Upcoming Events</h1>
+
+    </a>
+
+    <div id="eventCarousel" class="carousel slide">
+
+        <div class="carousel-inner">
+
+        {% for event_row in event_items | batch(3) %}
+
+            <div class="item carousel-item {% if loop.index == 1 %} active {% endif %}">
+
+                <div class="row mt-2">
+
+                    {% for event_item in event_row %}
+
+                        <div class="col-lg-4">
+
+                            <div class="rounded event_container border rounded" >
+
+                                <div class="event_date mr-2 border rounded text-center bold float-left">
+
+                                    <div class="event_day">
+                                        {{ event_item.date.strftime('%d') }}
+
+                                    </div>
+
+                                    <div class="event_month">
+                                        {{ event_item.date.strftime('%b')}}
+
+                                    </div>
+
+                                </div>
+
+                                <div class="limit">
+                                    <b> {{ event_item.name }} </b><br>
+                                    <p class="limit">{{ event_item.description }}</p>
+
+                                </div>
+
+                                <div>
+
+                                    <button class="btn-primary custom-btn rounded float-right event_button"
+                                            data-toggle="modal" data-target="#modal{{event_item.id}}">
+                                        More Info
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="modal fade" id="modal{{event_item.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                            <div class="modal-dialog" role="document">
+
+                                <div class="modal-content">
+
+                                    <div class="modal-header event_modal_bg">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{event_item.name}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                        <div class="container">
+                                            <i class="far fa-clock mr-2"></i> {{ event_item.start_time }} -  {{ event_item.end_time }} <br>
+                                            <i class="far fa-calendar-alt mr-2"></i> {{ event_item.date.strftime('%m/%d/%Y') }} <br>
+                                            <i class="fas fa-map-marker-alt mr-2"></i> <a target="_blank" href="https://maps.google.com/?q={{event_item.location}}"> {{event_item.location}}</a> <br>
+                                            <br>
+                                            {{ event_item.description }}
+                                        </div>
+
+                                    </div>
+
+                                    <div class="modal-footer event_modal_bg">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                            {% else%}
+
+                                <center>
+                                    <h3 class="text-white mt-5 ml-4">
+                                        Act fast, our schedule is open. <a href="#contact">Contact</a> us to plan your next get together!
+                                    </h3>
+                                </center>
+
+
+                    {% endfor %}
+
+
+
+                </div>
+            </div>
+
+        {% endfor %}
+
+        </div>
+
+        <a class="carousel-control-prev float-left mt-2" href="#eventCarousel" data-slide="prev">
+            <span class="carousel-control-prev-icon "></span>
+        </a>
+
+        <a class="carousel-control-next float-right mt-2" href="#eventCarousel" data-slide="next">
+            <span class="carousel-control-next-icon "></span>
+        </a>
+
+
+    </div>
+
+</div>
+
+
+
+<div class="container" style="margin-top:30px;">
+
+    <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom">Book us for your next event!</legend>
+
+                    <p>
+                        Thank you for choosing us for your next catered event! Fill out the form below and we will contact you as soon as possible in order to go over
+                    any details and confirm your booking.
+                    </p>
+                <br>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.customer_first.label(class="form-control-label") }}:
+                                {{ form.customer_first(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.customer_last.label(class="form-control-label") }}:
+                                {{ form.customer_last(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.email.label(class="form-control-label") }}:
+                                {{ form.email(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.phone.label(class="form-control-label") }}:
+                                {{ form.phone(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.location.label(class="form-control-label") }}:
+                                {{ form.location(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.date.label(class="form-control-label") }}:
+                                {{ form.date(class="form-control form-control-sm", id="datepicker") }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.start_time.label(class="form-control-label") }}:
+                                {{ form.start_time(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.end_time.label(class="form-control-label") }}:
+                                {{ form.end_time(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form.guest_count.label(class="form-control-label") }}:
+                                {{ form.guest_count(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="form-group">
+                                {{ form.info.label(class="form-control-label") }}:
+                                {{ form.info(class="form-control form-control-sm") }}
+                            </div>
+                        </div>
+
+                    </div>
+
+            </fieldset>
+            <div class="form_group">
+                {{ form.submit(class="btn btn-success") }}
+            </div>
+        </form>
+</div>
+
+<br>
+<br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $('#datepicker').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#datepicker').datepicker("setDate", new Date());
+
+    </script>
+
+{% endblock %}

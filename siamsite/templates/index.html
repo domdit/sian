@@ -42,7 +42,7 @@
     <div class="container">
         <img src="static/img/seal.png" alt="" class="logo">
         <div class="mx-auto">
-        <a class="navbar-brand varela" href="#">sian<small class="text-muted">STREETFOOD</small></a>
+        <a class="navbar-brand mrdafoe lead" style="font-size:35px;" href="#">sianstreetfood</a>
         </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,6 +55,7 @@
                 <a class="nav-item custom-item" href="#about">About</a>
                 <a class="nav-item custom-item" href="#events">Events</a>
                 <a class="nav-item custom-item" href="#cater">Catering</a>
+                <a class="nav-item custom-item" href="{{url_for('booking')}}">Book Us</a>
                 <a class="nav-item custom-item" href="#contact">Contact</a>
             </div>
         </div>
@@ -90,7 +91,7 @@
                             <i class="fab fa-snapchat-ghost"></i>
                         </span>
                     </a>
-                    <a href="https://twitter.com/sianstreetfood1" target="_blank" class="btn text-dark">
+                    <a href="https://twitter.com/sianstreetfood" target="_blank" class="btn text-dark">
                         <span style="font-size:45px;">
                             <i class="fab fa-twitter"></i>
                         </span>
@@ -239,10 +240,10 @@
             <div class="col-md-6">
                 <img class="img-fluid" src="static/img/monique.jpg">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 varela align-self-center" style="font-size:20px;">
+
                 <p>
-                    Bacon ipsum dolor amet sirloin drumstick turkey, filet mignon ham pork chop frankfurter ribeye sausage burgdoggen leberkas cow bresaola. Salami ham hock meatloaf tri-tip pork loin corned beef buffalo drumstick shoulder cupim fatback ham tenderloin bacon pancetta. Tenderloin frankfurter ground round, ribeye alcatra leberkas boudin short ribs. Biltong spare ribs filet mignon prosciutto pork loin beef ribs drumstick chicken doner chuck porchetta tenderloin cow. Buffalo sirloin pig, tongue ball tip capicola ham short loin. Cupim sausage burgdoggen sirloin pork belly rump, short loin meatloaf biltong t-bone bacon pork loin kielbasa.
-                    Meatball andouille frankfurter, cupim jerky pork loin ribeye bresaola alcatra capicola ham hock shank boudin pastrami pancetta. Kevin meatloaf venison tenderloin, turducken jerky corned beef landjaeger sausage chuck pancetta. Kevin bresaola kielbasa, spare ribs meatloaf chuck picanha pork loin. Shoulder pancetta ham short loin cow tenderloin leberkas picanha drumstick tri-tip porchetta doner bacon pork belly sausage. Tongue hamburger landjaeger doner jerky, pancetta turducken bresaola filet mignon brisket andouille ham sausage prosciutto. Landjaeger pork loin hamburger, brisket turducken ham hock spare ribs ribeye filet mignon picanha doner tail pancetta buffalo.
+                    {{ about.text }}
                 </p>
 
             </div>
@@ -498,36 +499,37 @@
     </div>
 </div>
 
-<div class="container-fluid w-100 bg-dark my_footer text-light  p-3 border-top border-success">
+<div class="container-fluid w-100 bg-white my_footer footer_container text-dark  p-3 border-top border-danger">
 
     <div class="container ">
         <center>
 
 
-            <h1>sian<small class="text-muted">STREETFOOD</small></h1>
+        <p class="mrdafoe lead" style="font-size:55px; color:#c62625;" href="#">sianstreetfood</p>
 
-                <a class="btn text-success" href="#menu">Menu</a>
-                <a class="btn text-success" href="#about">About</a>
-                <a class="btn text-success" href="#events">Events</a>
-                <a class="btn text-success" href="#cater">Catering</a>
-                <a class="btn text-success" href="#contact">Contact</a>
-                <br>
-                <a href="https://www.facebook.com/sianstreetfood/" class="btn text-light">
+                <a class="nav-item custom-item" href="#menu">Menu</a>
+                <a class="nav-item custom-item" href="#about">About</a>
+                <a class="nav-item custom-item" href="#events">Events</a>
+                <a class="nav-item custom-item" href="#cater">Catering</a>
+                <a class="nav-item custom-item" href="{{url_for('booking')}}">Book Us</a>
+                <a class="nav-item custom-item" href="#contact">Contact</a>
+                <br><br>
+                <a href="https://www.facebook.com/sianstreetfood/" class="btn text-dark">
                     <span style="font-size:25px;">
                         <i class="fab fa-facebook-square"></i>
                     </span>
                 </a>
-                <a href="https://www.instagram.com/sianstreetfood/" class="btn text-light">
+                <a href="https://www.instagram.com/sianstreetfood/" class="btn text-dark">
                     <span style="font-size:25px;">
                         <i class="fab fa-instagram"></i>
                     </span>
                 </a>
-                <a href="#" class="btn text-light">
+                <a href="#" class="btn text-dark">
                     <span style="font-size:25px;">
                         <i class="fab fa-snapchat-ghost"></i>
                     </span>
                 </a>
-                <a href="https://twitter.com/sianstreetfood1" class="btn text-light">
+                <a href="https://twitter.com/sianstreetfood" class="btn text-dark">
                     <span style="font-size:25px;">
                     <i class="fab fa-twitter"></i>
                         </span>
@@ -535,7 +537,7 @@
                 <br>
                 <br>
                 <small class="text-muted">
-                    Designed by <a class="text-success" href="http://www.domdit.com">Dominic DiTaranto</a> | <i class="far fa-copyright"></i> Copyright {{year}}
+                    Designed by <a class="text-danger" href="http://www.domdit.com">Dominic DiTaranto</a> | <i class="far fa-copyright"></i> Copyright {{year}}
                 </small>
         </center>
     </div>

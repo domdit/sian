@@ -4,9 +4,9 @@ from flask import render_template, flash, redirect, url_for, request, make_respo
 from flask_mail import Message
 from flask_login import login_user, current_user, logout_user, login_required, login_manager
 from siamsite import app, mail, db, bcrypt
-from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent
+from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent, CaterOrder, AboutForm
 from siamsite.utils import Twitter, save_picture
-from siamsite.models import MenuItem, User, CaterItem, EventItem
+from siamsite.models import MenuItem, User, CaterItem, EventItem, About
 from datetime import datetime
 
 
@@ -17,7 +17,7 @@ def index():
     year = str(datetime.now().year)
 
     # Handling Twitter
-    twitter_user_name = "sianstreetfood1"
+    twitter_user_name = "sianstreetfood"
     tweet = Twitter(twitter_user_name)
     handle = tweet.user
     text = tweet.text
@@ -27,18 +27,20 @@ def index():
     menu_image_list = []
     for root, dirs, files in os.walk('siamsite/static/img/menu/'):
         for filename in files:
-            x = os.path.join('static/img/menu/', filename)
+            x = os.path.join('siamsite/static/img/menu/', filename)
             menu_image_list.append(x)
 
     # Menu Items
     items = MenuItem.query.order_by(MenuItem.rank.asc())
 
     # Cater Menu Items
-
     cater_items = CaterItem.query.order_by(CaterItem.rank.asc())
 
     # Event Items
     event_items = EventItem.query.order_by(EventItem.date.asc())
+
+    # About Us
+    about = About.query.first()
 
     # Handling email contact form
     form = Contact()
@@ -54,12 +56,43 @@ def index():
             mail.send(msg)
             flash('Message sent successfully!')
 
-    return render_template('index.html', title='Sian Street Food', form=form, year=year, items=items,
+    return render_template('index.html', title='Sian Street Food', form=form, year=year, items=items, about=about,
                            tweet_handle=handle, tweet_text=text, tweet_time=time, tweet_user=twitter_user_name,
                            image1=menu_image_list[0], image2=menu_image_list[1],
                            image3=menu_image_list[2], image4=menu_image_list[3],
                            event_items=event_items, cater_items=cater_items
                            )
+
+@app.route("/booking", methods=['GET', 'POST'])
+def booking():
+
+    event_items = EventItem.query.order_by(EventItem.date.asc())
+
+    form = CaterOrder()
+    if request.method == 'POST':
+        if form.validate_on_submit() is False:
+            flash('Try Again. Make sure all fields are filled.')
+        if form.validate_on_submit() is True:
+            subject = "New catering order from " + form.customer_first.data + "!"
+            msg = Message(subject=subject, sender='booking@sianstreetfood.com', recipients=['customer@sianstreetfood.com'])
+            msg.body = '''
+            From: %s %s
+            Contact Info: <%s> %s
+            Event Date: %s
+            Time: %s - %s
+            Guest Count: %s
+            Location: %s
+            
+            Additional Info: %s
+            
+            ''' % (form.customer_first.data, form.customer_last.data, form.email.data, form.phone.data, form.date.data,
+                   form.start_time.data, form.end_time.data, form.guest_count.data, form.location.data, form.info.data)
+
+            mail.send(msg)
+            flash('Email sent successfully, expect a reply shortly.')
+            return redirect(url_for('index'))
+
+    return render_template('booking.html', title='Catering Booking - Sian Street Food', form=form, event_items=event_items)
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -109,6 +142,26 @@ def admin():
     return render_template('admin.html', title='Manage Menu - SSF Admin',
                            menu_form=menu_form, items=items)
 
+
+@app.route("/admin/about", methods=['GET', 'POST'])
+@login_required
+def about():
+    form = AboutForm()
+    if form.validate_on_submit():
+
+        old = About.query.first()
+        if old:
+            db.session.delete(old)
+
+        new_item = About(text=form.about.data)
+        db.session.add(new_item)
+        db.session.commit()
+        flash('About Us section successfully updated', 'success')
+        return redirect(url_for('about'))
+
+    about = About.query.all()
+
+    return render_template('about.html', title='Manage About Us - SSF Admin', form=form, about=about)
 
 @app.route("/admin/catering", methods=['GET', 'POST'])
 @login_required

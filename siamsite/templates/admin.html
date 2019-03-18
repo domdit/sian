@@ -114,6 +114,7 @@
             <li class="nobull kore" id="{{ item.id }}">
                 <div class="menu_item">
                     {% if item.head == True %}
+
                     <div>
                         <div class="menu_heading">
                             {{ item.name }}
@@ -125,7 +126,6 @@
                         </div>
 
                         <a href="{{ url_for('delete_item', item_id=item.id, table='MenuItem', location='admin') }}">Delete</a>
-
                     </div>
             {% else %}
                 <div class="col">
@@ -150,9 +150,10 @@
 
             {% endif %}
 
-                </div>
-            </li>
+
+            </div>
             {% endfor %}
+
 
         </ul>
         <button class="btn btn-outline-info" onclick="postSave()">Save & Post Menu</button><br>

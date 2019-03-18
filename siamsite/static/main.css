@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya');
 @import url('https://fonts.googleapis.com/css?family=Varela+Round');
+@import url('https://fonts.googleapis.com/css?family=Mr+Dafoe');
 
 html {
     scroll-behavior: smooth;
@@ -7,6 +8,10 @@ html {
 
 .nobull{
     list-style-type: none;
+}
+
+.mrdafoe{
+    font-family: 'Mr Dafoe', cursive;
 }
 
 .varela{
@@ -18,7 +23,6 @@ html {
     font-family: 'Alegreya', serif;
 
 }
-
 
 .dim{
     filter: brightness(100%);
@@ -78,7 +82,6 @@ h1{
     font-family: 'Alegreya', serif;
     font-size: 20px;
     color: #666666;
-
 }
 
 .menu_item_description{
@@ -91,7 +94,7 @@ h1{
 .menu_heading{
     font-family: 'Varela Round', sans-serif;
     font-size: 26px;
-    color: #666666;
+    color: #c62625;
 
 }
 
@@ -105,6 +108,8 @@ h1{
 
 .footer_container{
     margin: auto;
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/soft-kill.png");
 }
 
 .login_bg{
@@ -186,6 +191,12 @@ h1{
 
 .logo{
     width: 10%;
+    height: auto;
+    margin-right: 10px;
+}
+
+.mini_logo{
+    width: 5%;
     height: auto;
     margin-right: 10px;
 }

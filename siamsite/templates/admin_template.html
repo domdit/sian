@@ -36,6 +36,9 @@
             <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'img' else '' }}"
                href="{{url_for('image_uploader')}}">Update Images</a>
 
+            <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'about' else '' }}"
+               href="{{url_for('image_uploader')}}">Update About Us</a>
+
             <a class="list-group-item py-1 list-group-item-action {{ 'active' if active_page == 'admin' else '' }}"
                href="{{url_for('new_admin')}}">Create New Administrative Account</a>
 
