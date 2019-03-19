@@ -12,6 +12,22 @@ class Login(FlaskForm):
     submit = SubmitField('Login')
 
 
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('That email address does not exist. Register for a new account.')
+
+
+class ResetPassword(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
+
+
 class NewAdmin(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -63,6 +79,7 @@ class CaterOrder(FlaskForm):
 
     info = TextAreaField('Additional Info')
     submit = SubmitField('Submit')
+
 
 class NewEvent(FlaskForm):
     name = StringField('Event Name', validators=[DataRequired()])

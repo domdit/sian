@@ -4,7 +4,9 @@ from flask import render_template, flash, redirect, url_for, request, make_respo
 from flask_mail import Message
 from flask_login import login_user, current_user, logout_user, login_required
 from siamsite import app, mail, db, bcrypt
-from siamsite.forms import NewItem, Contact, Image, Login, NewAdmin, NewCaterItem, NewEvent, CaterOrder, AboutForm
+from siamsite.forms import (NewItem, Contact, Image, Login, NewAdmin,
+                            NewCaterItem, NewEvent, CaterOrder, AboutForm,
+                            RequestResetForm, ResetPassword)
 from utils import Twitter, save_picture
 from siamsite.models import MenuItem, User, CaterItem, EventItem, About
 from datetime import datetime
@@ -112,6 +114,57 @@ def login():
             return redirect(url_for('login'))
 
     return render_template('login.html', form=form, title='Admin Login')
+
+
+@app.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+
+    form = RequestResetForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('admin'))
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        reset_email(user)
+        flash('An email has been sent with instructions to reset your password', 'info')
+        return redirect(url_for('login'))
+
+    return render_template('reset_request.html', title="Reset Password - SSF", form=form)
+
+
+def reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Reset Password - Sian Street Food', sender='noreply@sianstreetfood.com', recipients=[user.email])
+    msg.body = f'''
+To reset your password, visit the following link:
+{url_for('reset_password', token=token, _external=True)}
+
+If you did not make this request, ignore this email.
+'''
+    mail.send(msg)
+
+
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_password(token):
+
+    form = ResetPassword()
+    if current_user.is_authenticated:
+        return redirect(url_for('admin'))
+
+    user = User.verify_reset_token(token)
+
+    if user is None:
+        flash('Your verification token has expired or is invalid, Try again.', 'danger')
+        return redirect(url_for('reset_request'))
+
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('You have successfully updated your password!', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('reset_token.html', title="Reset Password", form=form)
 
 
 @app.route("/logout")
