@@ -135,12 +135,8 @@ def reset_request():
 def reset_email(user):
     token = user.get_reset_token()
     msg = Message('Reset Password - Sian Street Food', sender='noreply@sianstreetfood.com', recipients=[user.email])
-    msg.body = '''
-To reset your password, visit the following link:
-%s
-
-If you did not make this request, ignore this email.
-''' % ({url_for('reset_password', token=token, _external=True)})
+    token_link = url_for('reset_password', token=token, _external=True)
+    msg.body = "To reset your password, click the following link: " + token_link
     mail.send(msg)
 
 
