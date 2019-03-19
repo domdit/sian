@@ -36,31 +36,7 @@
 
 {% block content %}
 
-
-<!-- NAVIGATION BAR -->
-<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white border-bottom">
-    <div class="container">
-        <img src="static/img/seal.png" alt="" class="logo">
-        <div class="mx-auto">
-        <a class="navbar-brand mrdafoe lead" style="font-size:35px;" href="#">sianstreetfood</a>
-        </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-        <div class="collapse navbar-collapse"  id="navbarNavAltMarkup">
-            <div class="navbar-nav ml-auto">
-                <a class="nav-item custom-item" href="#menu">Menu</a>
-                <a class="nav-item custom-item" href="#about">About</a>
-                <a class="nav-item custom-item" href="#events">Events</a>
-                <a class="nav-item custom-item" href="#cater">Catering</a>
-                <a class="nav-item custom-item" href="{{url_for('booking')}}">Book Us</a>
-                <a class="nav-item custom-item" href="#contact">Contact</a>
-            </div>
-        </div>
-    </div>
-</nav>
+{% include 'navbar_template.html' %}
 
 
 
